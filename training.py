@@ -8,7 +8,7 @@ from sklearn.preprocessing import FunctionTransformer
 from sklearn.metrics import mean_absolute_error
 
 #import data and select only the numeric columns
-df = pd.read_csv("C:\\Users\\user\\Downloads\html2023-spring-final-project\\train.csv", sep = ',')
+df = pd.read_csv("kaggle/html2023-spring-final-project/train.csv", sep = ',')
 y = df['Danceability']
 x = df.drop(['Danceability','Artist','Album_type','Album','Licensed','official_video','id','Track','Uri','Url_spotify','Url_youtube','Description','Title','Channel','Composer'], axis =1)
 
