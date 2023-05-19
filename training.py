@@ -55,3 +55,4 @@ y_predict = cross_val_predict(best_model, x_train, y, cv=5)
 y_predict_int = y_predict.round()
 mae = mean_absolute_error(y, y_predict_int)
 print(mae)
+------> 1.68
