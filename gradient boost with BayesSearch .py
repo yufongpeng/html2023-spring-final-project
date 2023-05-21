@@ -30,6 +30,7 @@ param_space = {
     'learning_rate': (0.02, 0.2, 'uniform'),  # Learning rate
     'max_depth': (1, 20),  # Maximum depth of each tree
     'min_samples_leaf': (1,200  ),  # Minimum number of samples required to split an internal node
+    'l2_regularizer':(0.01,0.1), #regularizer
 }
 
 # Create a BayesSearchCV object
@@ -46,5 +47,5 @@ best_param = optimizer.best_params_
 y_predict = cross_val_predict(best_model, x_train, y, cv=5)
 y_predict_int = y_predict.round()
 mae = mean_absolute_error(y, y_predict_int)
-print(mae)       #1.6868375072801398
-print(best_param)     #OrderedDict([('learning_rate', 0.06439680839523147), ('max_depth', 7), ('max_iter', 786), ('min_samples_leaf', 52)])
+print(mae)       #1.6837507280139778
+print(best_param)     #OrderedDict([('l2_regularization', 0.08431100392200155), ('learning_rate', 0.0948966816697544), ('max_depth', 14), ('max_iter', 429), ('min_samples_leaf', 113)])
