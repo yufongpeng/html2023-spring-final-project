@@ -42,20 +42,9 @@ optimizer.fit(x_train, y)
 best_model = optimizer.best_estimator_
 best_param = optimizer.best_params_
 
-'''#testing histgradientboost with fixed parameter
-model = HistGradientBoostingRegressor()
-model.learning_rate = 0.1
-model. max_depth = 10
-model.min_samples_leaf = 90
-model.n_estimators = 10
-y_predict = cross_val_predict(model, x_train, y, cv=5)
-y_predict_int = y_predict.round()
-mae = mean_absolute_error(y, y_predict_int)
-print(mae)'''
-
 #estimate the error
 y_predict = cross_val_predict(best_model, x_train, y, cv=5)
 y_predict_int = y_predict.round()
 mae = mean_absolute_error(y, y_predict_int)
-print(mae)
-print(best_param)
+print(mae)       #1.6868375072801398
+print(best_param)     #OrderedDict([('learning_rate', 0.06439680839523147), ('max_depth', 7), ('max_iter', 786), ('min_samples_leaf', 52)])
