@@ -49,3 +49,7 @@ y_predict_int = y_predict.round()
 mae = mean_absolute_error(y, y_predict_int)
 print(mae)       #1.6837507280139778
 print(best_param)     #OrderedDict([('l2_regularization', 0.08431100392200155), ('learning_rate', 0.0948966816697544), ('max_depth', 14), ('max_iter', 429), ('min_samples_leaf', 113)])
+
+#without knn
+#1.6718112987769365
+#OrderedDict([('l2_regularization', 0.050797127375640606), ('learning_rate', 0.05117030450929176), ('max_depth', 20), ('max_iter', 747), ('min_samples_leaf', 140)])
