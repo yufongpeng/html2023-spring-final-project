@@ -24,8 +24,8 @@ param_space = {
     'learning_rate': (0.01,0.1,'uniform'),
     'max_depth': (3,10),
     'n_estimators': (100,1500),
-    'min_child_weight':(0.5,15),
-    'gamma': (0.001,0.5)
+    'min_child_weight':(0.5,15), # the smaller, the more easy to overfit
+    'gamma': (0.001,0.5) #l2 regularizer
 }
 model = xgb.XGBRegressor()
 #consruct bayesSearch object
@@ -36,8 +36,8 @@ best_param = opt.best_params_
 y_pred = cross_val_predict(best_model, x_train, y, cv = 5)
 y_pred_int = y_pred.round()
 mae = mean_absolute_error(y_pred_int, y)
-print(mae)
-print(best_param)
+print(mae) -------> 1.5835760046592895
+print(best_param) ------> OrderedDict([('gamma', 0.001), ('learning_rate', 0.048391470778895496), ('max_depth', 9), ('min_child_weight', 12.512400985268663), ('n_estimators', 1456)])
 
 # Save the trained model to a file
 joblib.dump(best_model, 'best_model.joblib')
