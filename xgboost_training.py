@@ -21,13 +21,14 @@ x_train = encoded_df.drop(['Danceability','Album_type','Album','Licensed','offic
 
 #param_space for bayesSearch
 param_space = {
-    'learning_rate': (0.01,0.1,'uniform'),
-    'max_depth': (3,10),
-    'n_estimators': (100,1500),
-    'min_child_weight':(0.5,15), # the smaller, the more easy to overfit
-    'gamma': (0.001,0.5) #l2 regularizer
+    'learning_rate': (0.01,0.06,'uniform'),
+    'max_depth': (7,15),
+    'n_estimators': (800,2000),
+    'min_child_weight':(10,30), # the smaller, the more easy to overfit
+    'gamma': (0,0.0001), #loss reduction
+    'lambda': (0.01,0.4) #l2 regularizer
 }
-model = xgb.XGBRegressor()
+model = xgb.XGBRegressor(eval_metrix = 'mae')
 #consruct bayesSearch object
 opt = BayesSearchCV(estimator = model, search_spaces = param_space, n_iter = 20, cv = 5, scoring='neg_mean_absolute_error', random_state=1)
 opt.fit(x_train, y)
@@ -36,8 +37,8 @@ best_param = opt.best_params_
 y_pred = cross_val_predict(best_model, x_train, y, cv = 5)
 y_pred_int = y_pred.round()
 mae = mean_absolute_error(y_pred_int, y)
-print(mae) -------> 1.5835760046592895
-print(best_param) ------> OrderedDict([('gamma', 0.001), ('learning_rate', 0.048391470778895496), ('max_depth', 9), ('min_child_weight', 12.512400985268663), ('n_estimators', 1456)])
+print(mae) -------> 1.577810133954572
+print(best_param) ------> OrderedDict([('gamma', 0.0001), ('lambda', 0.09720470800367997), ('learning_rate', 0.02033464927013854), ('max_depth', 10), ('min_child_weight', 20), ('n_estimators', 1195)])
 
 # Save the trained model to a file
 joblib.dump(best_model, 'best_model.joblib')
